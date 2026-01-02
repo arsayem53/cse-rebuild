@@ -1,25 +1,28 @@
-"""Create a program that:
-1. Creates an empty dictionary called 'contact'
-2. Asks user for: name, phone, email, city
-3. Stores these in the dictionary
-4. Prints all contact details in a clean format like:
+"""Create an empty dictionary called student.
+Ask user for:
+- Name
+- Age  
+- Grade
 
-===== CONTACT DETAILS =====
-Name: Alex
-Phone: 1234567890
-Email: alex@example.com
-City: New York
+Store these in the dictionary and print it.
+
+Example:
+Enter name: Alice
+Enter age: 20
+Enter grade: A
+Student: {'name': 'Alice', 'age': 20, 'grade': 'A'}
+
 """
+
 student = {
-    "name" : " X ",
-    "phone" : " 01581489810",
-    "email" : "s@gmail.com",
-    "city"  : "dhaka"
-
+    "Name" : " ",
+    "Age"  : " ",
+    "Grade": " "
 }
-print("Enter name, phone, email, city: ")
-print(student.values())
 
-for key, values in student:
-    print(f"{key} : {values}")
+student["Name"] = input("Enter the name: ")
+student["Age"] = input("Enter the Age: ")
+student["Grade"] = input("Enter the Grade: ")
+
+print(student)
 
