@@ -1,59 +1,80 @@
-"""## **PROGRAM 3: CHARACTER FREQUENCY COUNTER (30 min)**
+def add_task(tasks_list):
+    total = int(input("How many tasks do you want to input: "))
+    a = 1
+    while a <= total:
+        work = input(f"Enter task title for #{a}: ")
+        new_entry = {
+            "task_number": a, 
+            "title": work, 
+            "status": "incomplete"
+        }
+        tasks_list.append(new_entry)
+        a += 1
+    
+    return tasks_list
 
-### **Requirements:**
-Build a program that:
-1. Asks user for a text/sentence
-2. Counts how many times EACH character appears
-3. Displays the results in a clean format
-4. **Ignores spaces** (optional: make this a user choice)
-5. Shows characters in order of frequency (highest first)
+def display_task(task_list, complete_tasks):
+    print("Incompleted Tasks Are: ")
+    for t in task_list:
+        print(f"{t['task_number']}. {t['title']} [{t['status']}]")
+    print("Completed Tasks Are: ")
+    for t in complete_tasks:
+        print(f"{t['task_number']}. {t['title']} [{t['status']}]")
 
-### **Features to Include:**
-- Use a **dictionary** to store character counts
-- Option to ignore spaces or count them
-- Sort results by frequency (most common first)
-- Clean, readable output
-- Handle both uppercase and lowercase (decide: case-sensitive or not?)
+def mark_complete(task_list, complete_tasks):
+    target_title = input("Which task is completed: ")
+    found = False 
+    for task in task_list:
+        if task["title"] == target_title:
+            task["status"] = "complete"
+            complete_tasks.append(task)
+            print(f"Success! '{target_title}' moved to completed.")
+            task_list.remove(task)
+            found = True
+            break 
+    
+    if not found:
+        print("Task not found.")
+    
+    return task_list, complete_tasks
 
-### **Example Run:**
-```
-Enter text: Hello World
+def delete_task(task_list):
+    target_title = input("Which task is completed: ")
+    found = False 
+    for task in task_list:
+        if task["title"] == target_title:
+            task_list.remove(task)
+            found = True
+            break 
+    
+    if not found:
+        print("Task not found.")
+    
+    return task_list
+my_tasks = [] 
+completed_tasks = []
 
-Character Frequency Counter:
-l: 3
-o: 2
-H: 1
-e: 1
-W: 1
-r: 1
-d: 1
-(space): 1
+while True:
+    print("""=== TO-DO LIST MANAGER ===
+    1. Add task
+    2. View all tasks
+    3. Mark task as complete
+    4. Delete task
+    5. Exit""")
+    choice = int(input("Choose option (1-5):"))
+ 
+    if choice == 5:
+       exit()
 
-Most common character: 'l' (appears 3 times)
-```
+    elif choice == 1:
+       add_task(my_tasks)
 
-### **Advanced Version (Optional):**
-```
-Enter text: Hello World
-Count spaces? (yes/no): no
-Case sensitive? (yes/no): no
+    elif choice == 2:
+       display_task(my_tasks, completed_tasks)
 
-Character Frequency Counter:
-l: 3
-o: 2
-h: 1
-e: 1
-w: 1
-r: 1
-d: 1
+    elif choice == 3:
+       mark_complete(my_tasks, completed_tasks)
 
-Most common character: 'l' (appears 3 times)
-Hints:
+    elif choice == 4:
+       delete_task(my_tasks)
 
-Reuse your character counting logic from Exercise 35!
-Use dictionary: char_count = {}
-Loop through string: for char in text:
-To ignore spaces: if char != " ":
-To sort by frequency: Convert dict to list, then sort
-
-"""
